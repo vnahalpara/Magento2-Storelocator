@@ -27,7 +27,7 @@ class Transport extends \Zend_Mail_Transport_Smtp implements \Magento\Framework\
             'ssl' => 'ssl', 
             'port' => '465',
             'username' => 'vaibhav.ahalpara@brainvire.com',//smtm user name
-            'password' => 'XXXXXXXXXX'//smtppassword 
+            'password' => 'XXXXXXXXXXx'//smtppassword 
          ];
  
         parent::__construct($smtpHost, $smtpConf);
