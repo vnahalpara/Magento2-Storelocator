@@ -1,0 +1,220 @@
+<?php
+$store = $this->getCollection();
+$lat = $store->getLatitude();
+$lng = $store->getLongitude();
+$storeName = $store->getStoreName();
+$zoom = $store->getZoomLevel();
+$radius = $store->getRadius();
+$address = $store->getStreetAddress();
+$city = $store->getCity();
+$state = $store->getState();
+$country = $store->getCountry();
+$zipcode = $store->getZipcode();
+$phone = $store->getPhone();
+$fax = $store->getFax();
+$website = $store->getWebsite();
+$email = $store->getEmail();
+$opening = $store->getOpeningHours();
+$details = $store->getDescription();
+$mediaUrl = $this->getStoreManager()->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+?>
+<?php $backUrl =  $block->getUrl('storelocator/storelocator'); ?>
+<div class="page-title">
+    <h1><?php echo $storeName; ?> - Store Detail</h1>
+</div>
+<div class="main">
+	<div class="back">
+		<button onclick="window.location.href = ('<?php echo $backUrl; ?>');" class="button" title="Go Back" type="button">
+            <span>
+                <span>Go Back</span>
+            </span>
+        </button>
+	</div>
+	<div class="container">
+		<div class="left" style="width:50%">
+			<div class="map" style="width:100%;height:380px;float:left;">
+				<div id="map"></div>
+			</div>
+			<div class="contact">
+			<form class="form contact"
+			      action="<?php /* @escapeNotVerified */ echo $block->getUrl('storelocator/storelocator/send'); ?>"
+			      id="contact-form"
+			      method="post"
+			      data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>"
+			      data-mage-init='{"validation":{}}'>
+				<input type="hidden" name="store_id" value="<?php echo $store->getId(); ?>">
+				    <fieldset class="fieldset">
+				        <legend class="legend"><span>Write Us</span></legend><br>
+				        <div class="field note no-label">Jot us a note and we’ll get back to you as quickly as possible.</div>
+				        <div class="field name required">
+				            <label class="label" for="name"><span>Name</span></label>
+				            <div class="control">
+				                <input name="name" id="name" title="Name" value="" class="input-text" type="text" data-validate="{required:true}" aria-required="true">
+				            </div>
+				        </div>
+				        <div class="field email required">
+				            <label class="label" for="email"><span>Email</span></label>
+				            <div class="control">
+				                <input name="email" id="email" title="Email" value="" class="input-text" type="email" data-validate="{required:true, 'validate-email':true}" aria-required="true">
+				            </div>
+				        </div>
+				        <div class="field telephone">
+				            <label class="label" for="telephone"><span>Phone Number</span></label>
+				            <div class="control">
+				                <input name="telephone" id="telephone" title="Phone Number" value="" class="input-text" type="text">
+				            </div>
+				        </div>
+				        <div class="field comment required">
+				            <label class="label" for="comment"><span>What’s on your mind?</span></label>
+				            <div class="control">
+				                <textarea name="comment" id="comment" title="What’s on your mind?" class="input-text" cols="5" rows="3" data-validate="{required:true}" aria-required="true"></textarea>
+				            </div>
+				        </div>
+				            </fieldset>
+				    <div class="actions-toolbar">
+				        <div class="primary">
+				            <input type="hidden" name="hideit" id="hideit" value="">
+				            <button type="submit" title="Submit" class="action submit primary">
+				                <span>Submit</span>
+				            </button>
+				        </div>
+				    </div>
+				</form>
+			</div>
+		</div>
+		<div class="right" style="width:50%;float:right;">
+			<table id="store-view-detail-table" class="store-view-detail-data-table">
+		        <tbody>
+		            <tr>
+		                <td colspan="2">
+		                     <p><img src="<?php echo $mediaUrl.'/'.$store->getStoreLogo() ?>" alt="Store1" title="Store1"></p>
+		                </td>
+		            </tr>
+					<tr>
+		                <th class="label">Store Name :</th>
+		                <td><?php echo ($storeName ? $storeName : "-") ?></td>
+		            </tr>
+					<tr>
+		                <th class="label">Street Address :</th>
+		                <td><?php echo ($address ? $address : "-") ?></td>
+		            </tr>
+					<tr>
+		                <th class="label">City :</th>
+		                <td><?php echo ($city ? $city : "-") ?></td>
+		            </tr>
+		            <tr>
+		                <th class="label">State :</th>
+		                <td><?php echo ($state ? $state : "-") ?></td>
+		            </tr>
+					<tr>
+		                <th class="label">Country :</th>
+		                <td><?php echo ($country ? $country : "-") ?></td>
+		            </tr>
+					<tr>
+		                <th class="label">Zip Code :</th>
+		                <td><?php echo ($zipcode ? $zipcode : "-") ?></td>
+		            </tr>
+		                        
+					<tr>
+		                <th class="label">Phone :</th>
+		                <td><?php echo ($phone ? $phone : "-") ?></td>
+		            </tr>
+		                        
+					<tr>
+		                <th class="label">Fax :</th>
+		                <td><?php echo ($fax ? $fax : "-") ?></td>
+		            </tr>
+		                        
+					<tr>
+		                <th class="label">Website :</th>
+		                <td><?php echo ($website ? $website : "-") ?></td>
+		            </tr>
+		                        
+					<tr>
+		                <th class="label">Email :</th>
+		                <td><?php echo ($email ? $email : "-") ?></td>
+		            </tr>
+		                        
+					<tr>
+		                <th class="label">Trading Hours :</th>
+		                <td><?php echo ($opening ? $opening : "-") ?></td>
+		            </tr>
+		                        
+					<tr>
+		                <th class="label">Radius :</th>
+		                <td><?php echo ($radius ? $radius : "-") ?></td>
+		            </tr>
+		                        
+					<tr>
+		                <th class="label">Store Description :</th>
+		                <td><?php echo ($details ? $details : "-") ?></td>
+		            </tr>
+		        </tbody>
+	        </table>
+			<!-- <div class="logo">
+				<img height="100%" width="100%" src="<?php echo $mediaUrl.'/'.$store->getStoreLogo() ?>">
+			</div>
+			<div class="details">
+				
+			</div> -->
+		</div>
+	</div>
+</div>
+
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhhL62mRn6t8WlnOSrljP1Iq-JX_efxYY&callback=initMap"></script>
+<script type="text/javascript">
+	    function initMap() 
+	     {
+	     	var lat = <?php echo $lat; ?>;
+	     	var lng = <?php echo $lng; ?>;
+	     	var store = '<?php echo $storeName; ?>';
+	     	var zoom = <?php echo $zoom; ?>;
+	     	var radius = <?php echo $radius; ?>;
+	        var myLatLng = {lat: lat, lng: lng};
+	        var map = new google.maps.Map(document.getElementById('map'), {
+	          zoom: zoom,
+	          center: myLatLng
+	        });
+	        var infowindow = new google.maps.InfoWindow();
+	        var marker, i;  
+		    marker = new google.maps.Marker({
+		        position: new google.maps.LatLng(lat,lng),
+		        map: map
+		    });
+		    var circle = new google.maps.Circle({
+				  map: map,
+				  radius: radius,    // 10 miles in metres
+				  fillColor: '#AA0000'
+				});
+				circle.bindTo('center', marker, 'position');
+		    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+		        return function() {
+		          infowindow.setContent(store);
+		          infowindow.open(map, marker);
+		        }
+		    })(marker, i));
+	    }
+</script>
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  #map {
+    height: 100%;
+  }
+  li
+  {
+  	list-style: none;
+  }
+  .left
+  {
+  	float: left;
+  }
+  .right
+  {
+  	float: right;
+  }
+</style>
